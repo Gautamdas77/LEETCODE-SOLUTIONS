@@ -1,7 +1,10 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        map<char,int>mpp;
+        int n = s.size();
+        int m = t.size();
+        if(n!=m) return false;
+        map<int,int>mpp;
         for(auto it:s){
             mpp[it]++;
         }
@@ -9,7 +12,7 @@ public:
             mpp[it]--;
         }
         for(auto it:mpp){
-            if(it.second!=0) return false;
+            if(it.second>0) return false;
         }
         return true;
     }
