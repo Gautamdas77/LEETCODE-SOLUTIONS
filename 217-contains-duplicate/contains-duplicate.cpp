@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
+        int n = nums.size();
         map<int,int>mpp;
         for(auto it:nums){
             mpp[it]++;
@@ -8,6 +9,7 @@ public:
         for(auto it:mpp){
             if(it.second>1) return true;
         }
+
         return false;
     }
 };
