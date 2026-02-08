@@ -14,9 +14,12 @@ public:
         int k = getindex(key);
         list<pair<int,int>>&chain = vec[k];
         for(auto &it:chain){
-            if(it.first==key) it.second = value;
+            if(it.first==key) {
+                it.second = value;
+                return;
+            }
         }
-        vec[k].push_back({key,value});
+        chain.emplace_back(key,value);
     }
     
     int get(int key) {
@@ -31,8 +34,11 @@ public:
     void remove(int key) {
         int k = getindex(key);
         list<pair<int,int>>&chain = vec[k];
-        for(auto &it:chain){
-            if(it.first==key) it.second = -1;
+        for(auto it = chain.begin();it!=chain.end();++it){
+            if(it->first==key) {
+                chain.erase(it);
+                return;
+            }
         }
     }
 };
