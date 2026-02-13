@@ -1,18 +1,14 @@
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+        map<int,int>mpp;
+        for(auto it:nums){
+            mpp[it]++;
+        }
         int number = 1;
-        int val = INT_MIN;
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]<1){
-                continue;
-            }
-            else if(nums[i]==val) continue;
-            else if(nums[i]==number){
-                number++;
-                val = nums[i];
-            }
+        for(auto it:mpp){
+            if(it.first<1) continue;
+            else if(it.first == number) number++;
             else break;
         }
 
