@@ -3,15 +3,30 @@ public:
     bool checkInclusion(string s1, string s2) {
         int n = s1.size();
         int m = s2.size();
-        sort(s1.begin(),s1.end());
-        
-        for(int i=0;i<=m-n;i++){
-            string substring = s2.substr(i,n);
-            sort(substring.begin(),substring.end());
-            if(s1==substring) return true;
+
+        if(n>m) return false;
+
+        vector<int>s1_freq(26,0);
+        vector<int>s2_freq(26,0);
+
+        for(char&a:s1){
+            s1_freq[a-'a']++;
         }
 
-        return false;
+        int i=0;
+        int j=0;
+        while(j<m){
+            s2_freq[s2[j]-'a']++;
+            if(j-i+1>n){
+                s2_freq[s2[i]-'a']--;
+                i++;
+            }
 
+            if(s1_freq == s2_freq){
+                return true;
+            }
+            j++;
+        }
+        return false;
     }
 };
